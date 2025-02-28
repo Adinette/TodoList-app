@@ -11,9 +11,7 @@ function signInService(credentials: {
   return request.post("auth/login", credentials);
 }
 
-function forgotPasswordService(credentials: {
-  email: string;
-}): PromisedAppResponseType<IUser> {
+function forgotPasswordService(credentials: { email: string }): PromisedAppResponseType<IUser> {
   return request.post("auth/forgot-password", credentials);
 }
 
@@ -24,7 +22,7 @@ function resetPasswordService(credentials: {
 }): PromisedAppResponseType<IUser> {
   return request.post(`auth/reset-password/${credentials.token}`, {
     newPassword: credentials.newPassword,
-    confirmPassword: credentials.confirmPassword
+    confirmPassword: credentials.confirmPassword,
   });
 }
 

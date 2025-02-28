@@ -1,4 +1,4 @@
-import { logoutUser } from "@/services/request";
+import { signOutService } from "../services/auth.service";
 
 export const isAuthenticated = () => {
   const token = localStorage.getItem('token');
@@ -12,7 +12,7 @@ export const isAuthenticated = () => {
   const timeElapsed = currentTime - parseInt(loginTime, 10);
 
   if (timeElapsed > 3600) {
-    logoutUser();
+    signOutService();
     return false;
   }
 

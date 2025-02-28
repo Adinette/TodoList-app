@@ -13,9 +13,12 @@
     "tailwind": "tailwindcss"
   },
   "dependencies": {
+    "@iconify/vue": "^4.3.0",
     "@tailwindcss/vite": "^4.0.4",
     "@tanstack/vue-query": "^5.66.0",
     "axios": "^1.7.9",
+    "chart.js": "^4.4.8",
+    "dayjs": "^1.11.13",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^4.0.0",
     "pinia": "^3.0.0",

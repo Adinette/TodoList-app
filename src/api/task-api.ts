@@ -7,6 +7,7 @@ import {
   getTaskService,
   getByIdTaskService,
   editTaskService,
+  editStatusTaskService,
 } from "../services/task.service";
 import { type ErrorResponseType } from "../types";
 import { type AppResponseType } from "../types";
@@ -88,7 +89,7 @@ function useEditTaskApi(
     (options as UseMutationOptions<AppResponseType<ITask>, ErrorResponseType, Partial<ITask>> & {
       onSuccess?: (
         data: AppResponseType<ITask>,
-        variables: Partial<ITask>,
+        variables: { id: string; data: Partial<ITask> },
         context: unknown
       ) => void;
     }) || {};
@@ -96,6 +97,34 @@ function useEditTaskApi(
   return useMutation({
     mutationKey: [MODEL_KEY.TASKS],
     mutationFn: editTaskService,
+    onSuccess({ data }, id, context) {
+      handleMutationSuccess(queryClient, data);
+      onSuccess?.({ data }, id, context);
+    },
+    ...options,
+  });
+}
+
+function useEditStatusTaskApi(
+  options?: UseMutationOptions<
+    AppResponseType<ITask>,
+    ErrorResponseType,
+    Partial<{ id: string; data: Partial<ITask> }>
+  >
+) {
+  const queryClient = useQueryClient();
+  const { onSuccess } =
+    (options as UseMutationOptions<AppResponseType<ITask>, ErrorResponseType, Partial<ITask>> & {
+      onSuccess?: (
+        data: AppResponseType<ITask>,
+        variables: Partial<ITask>,
+        context: unknown
+      ) => void;
+    }) || {};
+
+  return useMutation({
+    mutationKey: [MODEL_KEY.TASKS],
+    mutationFn: editStatusTaskService,
     onSuccess({ data }, variables, context) {
       handleMutationSuccess(queryClient, data);
       onSuccess?.({ data }, variables, context);
@@ -141,4 +170,5 @@ export {
   useEditTaskApi,
   useCreateTaskApi,
   useDeleteTaskApi,
+useEditStatusTaskApi
 };

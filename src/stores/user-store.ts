@@ -1,6 +1,6 @@
-import { defineStore } from 'pinia';
-import { type IUser } from '../models';
-import { jwtDecode } from 'jwt-decode';
+import { defineStore } from "pinia";
+import { type IUser } from "../models";
+import { jwtDecode } from "jwt-decode";
 
 interface IUserStore {
   user: IUser | null;
@@ -12,11 +12,14 @@ interface IUserStore {
   initializeAuth: () => void;
 }
 
-export const useUserStore = defineStore('user', {
-  state: (): Omit<IUserStore, 'setUser' | 'clearUser' | 'checkTokenExpiration' | 'initializeAuth'> => ({
+export const useUserStore = defineStore("user", {
+  state: (): Omit<
+    IUserStore,
+    "setUser" | "clearUser" | "checkTokenExpiration" | "initializeAuth"
+  > => ({
     user: null,
     isAuthenticated: false,
-    token: localStorage.getItem('authToken') || null,
+    token: localStorage.getItem("authToken") || null,
   }),
   actions: {
     setUser(user: IUser) {
@@ -29,7 +32,7 @@ export const useUserStore = defineStore('user', {
       this.user = null;
       this.isAuthenticated = false;
       this.token = null;
-      localStorage.removeItem('authToken');
+      localStorage.removeItem("authToken");
     },
     checkTokenExpiration() {
       if (this.token) {
@@ -46,10 +49,10 @@ export const useUserStore = defineStore('user', {
       }
     },
     initializeAuth() {
-      const storedToken = localStorage.getItem('authToken');
+      const storedToken = localStorage.getItem("authToken");
       if (storedToken) {
         try {
-          const decodedToken = jwtDecode<{ exp: number, user: IUser }>(storedToken);
+          const decodedToken = jwtDecode<{ exp: number; user: IUser }>(storedToken);
           const currentTime = Date.now() / 1000;
 
           if (decodedToken.exp > currentTime) {
@@ -65,5 +68,5 @@ export const useUserStore = defineStore('user', {
         }
       }
     },
-  }
+  },
 });

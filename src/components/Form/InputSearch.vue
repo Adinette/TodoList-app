@@ -14,22 +14,18 @@ interface Props {
 
 const props = defineProps<Props>();
 const emit = defineEmits(["update:modelValue"]);
-
 const inputValue = ref(props.modelValue ?? "");
 
-// ⚠️ Synchroniser inputValue avec props.modelValue
 watch(() => props.modelValue, (newValue) => {
   inputValue.value = newValue ?? "";
 });
 
-// Mettre à jour la valeur sur input
 const onInput = (event: Event) => {
   const target = event.target as HTMLInputElement;
   emit("update:modelValue", target.value);
 };
 
 const hasError = computed(() => props.errors && props.errors.length > 0);
-const firstError = computed(() => (Array.isArray(props.errors) ? props.errors[0] : props.errors));
 </script>
 
 <template>
@@ -45,6 +41,5 @@ const firstError = computed(() => (Array.isArray(props.errors) ? props.errors[0]
           inputClass
         ]" />
     </div>
-    <p v-if="hasError" class="text-danger mt-1 text-sm">{{ firstError }}</p>
   </div>
 </template>

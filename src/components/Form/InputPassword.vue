@@ -24,7 +24,6 @@ const onInput = (event: Event) => {
 };
 
 const hasError = computed(() => props.errors && props.errors.length > 0);
-const firstError = computed(() => (Array.isArray(props.errors) ? props.errors[0] : props.errors));
 </script>
 
 <template>
@@ -45,7 +44,5 @@ const firstError = computed(() => (Array.isArray(props.errors) ? props.errors[0]
         <img :src="isPasswordVisible ? '/images/view.png' : '/images/hide.png' " alt="eye" class="w-6"/>
       </button>
     </div>
-
-    <p v-if="hasError" class="text-danger mt-1 text-sm">{{ firstError }}</p>
   </div>
 </template>

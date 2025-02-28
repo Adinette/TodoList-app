@@ -11,7 +11,7 @@ import {
   useQueryClient,
   type QueryOptions,
 } from "@tanstack/vue-query";
-import { getStatusTaskService } from "../services/taskStatus.service";
+import { getStatusTaskService } from "../services/task-status.service";
 import { createTaskService, deleteTaskService, editTaskService, getByIdTaskService } from "../services/task.service";
 
 // Generic hook for handling common query logic
@@ -101,15 +101,14 @@ function useEditStatusTaskApi(
 
 // Delete task mutation
 function useDeleteStatusTaskApi(
-  options?: UseMutationOptions<AppResponseType<IStatusTask>, ErrorResponseType, string>  // Accepte un `string` ici
+  options?: UseMutationOptions<AppResponseType<IStatusTask>, ErrorResponseType, string>
 ) {
   const queryClient = useQueryClient();
 
   return useMutation<AppResponseType<IStatusTask>, ErrorResponseType, string>({
     mutationKey: [MODEL_KEY.STATUSTASKS],
-    mutationFn: (id: string) => deleteTaskService(id),  // `id` est de type `string`
+    mutationFn: (id: string) => deleteTaskService(id),
     onSuccess: () => {
-      // Invalide la query pour que les données se mettent à jour
       queryClient.invalidateQueries({ queryKey: [MODEL_KEY.STATUSTASKS] });
     },
     ...options,

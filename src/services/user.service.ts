@@ -5,9 +5,7 @@ import { MODEL_KEY } from "../constants";
 
 const request = requestService({ urlKey: MODEL_KEY.USERS });
 
-function getUserService(
-  params?: object
-): PromisedAppResponseType<IUser[]> {
+function getUserService(params?: object): PromisedAppResponseType<IUser[]> {
   return request.get("", params);
 }
 
@@ -15,10 +13,8 @@ function getByIdUserService(id: string): PromisedAppResponseType<IUser> {
   return request.get(id);
 }
 
-function createUserService(
-  data: Partial<IUser>
-): PromisedAppResponseType<IUser> {
-  return request.post("", data);
+function createUserService(data: Partial<IUser>): PromisedAppResponseType<IUser> {
+  return request.post("/register", data);
 }
 
 function editUserService({

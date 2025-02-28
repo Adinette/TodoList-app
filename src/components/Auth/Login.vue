@@ -1,26 +1,23 @@
-<script setup>
-import { onMounted, defineEmits, ref } from 'vue';
+<script setup lang="ts">
+import { onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useSignInApi } from '@/api/auth-api';
+import { useSignInApi } from '../../api/auth-api';
 import InputText from '../Form/InputText.vue';
 import InputPassword from '../Form/InputPassword.vue';
 import Form from '../Form/Form.vue';
 
-
 const route = useRoute();
 const router = useRouter();
-
-const emit = defineEmits(['register']);
 
 const email = ref('');
 const password = ref('');
 const errorMessage = ref('');
 
 onMounted(() => {
-  const token = route.query.token;
-  if (token) {
+  const token = route.query.token as string;
+  if (typeof token === 'string') {
     localStorage.setItem("authToken", token);
-    router.push("/todo")
+    router.push("/task-list")
   }
 })
 
@@ -34,22 +31,19 @@ const { mutateAsync: userLogin } = useSignInApi();
 const submitForm = async () => {
   try {
     errorMessage.value = '';
-
     const credentials = {
       email: email.value,
       password: password.value,
     };
     const response = await userLogin(credentials);
-
-    if (response && response.token) {
-      localStorage.setItem('authToken', response.token);
-      router.push('/todo');
+    if (response && response?.data?.token) {
+      localStorage.setItem('authToken', response.data.token);
+      router.push('/task-list');
     } else {
       errorMessage.value = "Email ou mot de passe incorrect.";
     }
   } catch (error) {
     errorMessage.value = "Échec de la connexion.";
-    console.error("Erreur lors de la connexion:", error.response?.data || error);
     throw error;
   };
   resetForm();
@@ -62,8 +56,7 @@ const submitForm = async () => {
       <div class="">
         <InputText class="my-8" id="email" type="email" name="email" placeholder="Email" v-model="email" requiredW>
         </InputText>
-        <InputPassword :id="password" :name="password" :type="password" placeholder="Password"
-          v-model="password" </InputPassword>
+        <InputPassword :id="password" :name="password" :type="password" placeholder="Password" v-model="password"></InputPassword>
       </div>
       <div class="text-center">
         <div class="mb-4">
@@ -86,4 +79,4 @@ const submitForm = async () => {
       </div>
     </Form>
   </div>
-  </template>
+</template>

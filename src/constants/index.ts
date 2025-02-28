@@ -4,7 +4,7 @@ export const ROUTES = {
     SIGNUP: "sign-up",
   },
   DASHBOARD: {
-    ROOT: "todo",
+    ROOT: "task-list",
   },
 };
 
@@ -28,49 +28,20 @@ export const headerLinks = [
     route: "/",
   },
   {
-    name: "A Propos",
-    route: "/apropos",
+    name: "Mes tâches",
+    route: "/task-list",
   },
   {
-    name: "Contacts",
-    route: "/profile",
+    name: "Mon tableau de bord",
+    route: "/task-dashboard",
   },
 ];
 
 export const eventDefaultValues = {
   title: "",
   description: "",
-  location: "",
-  imageUrl: "",
   startDateTime: new Date(),
   endDateTime: new Date(),
-  categoryId: "",
-  price: "",
-  isFree: false,
-  url: "",
+  status: "",
 };
-
-export const CIVILITY = [
-  {
-    value: "M.",
-    name: "Monsieur",
-  },
-  {
-    value: "Mme.",
-    name: "Madame",
-  },
-  {
-    value: "Mlle.",
-    name: "Mademoiselle",
-  },
-  {
-    name: "Autre",
-    value: "Autre",
-  },
-];
-
-export const SEXS = [
-  { name: "Masculin", value: "M" },
-  { name: "féminin", value: "F" },
-];
 

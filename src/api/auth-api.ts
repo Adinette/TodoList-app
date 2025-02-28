@@ -2,7 +2,7 @@ import { COOKIE_ATTRIBUTES, MODEL_KEY, ROUTES } from "../constants";
 import jsCookie from "../lib/cookie";
 import type { IUser } from "../models";
 import { forgotPasswordService, resetPasswordService, signInService, signOutService } from "../services/auth.service";
-import { useUserStore } from "../stores/userStore"; // Utilisation correcte du store
+import { useUserStore } from "../stores/user-store";
 import type { AppResponseType, ErrorResponseType } from "../types";
 import { updateCollectionCache } from "../utils/cache";
 import { QueryClient, useMutation, useQueryClient, type UseMutationOptions } from "@tanstack/vue-query";

@@ -1,25 +1,112 @@
-<script setup>
-import { defineProps, defineEmits } from 'vue';
+<script setup lang="ts">
+import { ref, computed, watch } from 'vue';
+import { useGetTasksApi, useDeleteTaskApi } from '../../api/task-api';
+import { useGetStatusTasksApi, useEditStatusTaskApi } from '../../api/task-status-api';
+import Dropdown from '../../components/drop-down.vue';
+import InputSearch from '../../components/Form/InputSearch.vue';
 
-const emit = defineEmits(['editTodo', 'deleteTodo']);
+interface Status {
+  id: string;
+  status: string;
+}
+interface Task {
+  id: number;
+  title: string;
+  description: string;
+  status: string;
+  startDate: string;
+  endDate: string;
+}
 
-const handleDeleteClick = (id) => {
+const emit = defineEmits(['updateTodos', 'editTodo', 'deleteTodo']);
+const tasks = ref<Array<{ id: number, title: string, description: string, status: string }>>([]);
+const statuses = ref<Status[]>([]);
+const formData = ref({ title: '' });
+const selectedStatus = ref('Tous');
+
+// Mettre à jour la liste des statuts quand l'API répond
+const { data: statusData } = useGetStatusTasksApi();
+watch(statusData, (newData) => {
+  if (newData) {
+    statuses.value = newData as Status[];
+  }
+}, { immediate: true });
+
+const { data: tasksData, refetch: fetchTasks } = useGetTasksApi();
+
+// Mettre à jour `tasks` et émettre les données.
+watch(tasksData, (newTasks) => {
+  if (newTasks) {
+    tasks.value = newTasks;
+    console.log('Mise à jour des tâches dans List.vue :', tasks.value);
+    emit('updateTodos', tasks.value);
+  }
+}, { immediate: true });
+
+
+// Fonction pour supprimer une tâche
+const deleteMutation = useDeleteTaskApi();
+const deleteTodo = async (id: any) => {
+  try {
+    console.log("Tentative de suppression de la tâche avec ID:", id);
+    await deleteMutation.mutateAsync(id);
+    if (!tasks.value) {
+      console.error("tasks.value est undefined !");
+      return;
+    }
+    fetchTasks();
+  } catch (err) {
+    console.error("Erreur lors de la suppression de la tâche:", err);
+  }
+};
+const handleDeleteClick = (id: number) => {
   console.log('Clic détecté pour la suppression de la tâche', id);
   const isConfirmed = window.confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?');
   if (isConfirmed) {
-    emit('deleteTodo', id);
+    deleteTodo(id);
   }
 };
 
+// Fonction pour modifier le statut d'une tâche en fonction de la date
+const editMutation = useEditStatusTaskApi();
+const handleStatusClick = async (task: Task) => {
+  const currentDate = new Date();
+  const startDate = new Date(task.startDate);
+  const endDate = new Date(task.endDate);
 
-const props = defineProps({
-  todos: Array,
+  if (currentDate >= startDate && currentDate <= endDate) {
+    task.status = 'En cours';
+  } else if (currentDate > endDate) {
+    task.status = 'Terminée';
+  }
+
+  try {
+    await editMutation.mutateAsync({ id: task.id, data: { status: task.status } });
+    fetchTasks();
+  } catch (err) {
+    console.error("Erreur lors de la mise à jour du statut de la tâche:", err);
+  }
+};
+
+// Liste des options pour le filtre de statut
+const statusOptions = computed(() => [{ label: 'Tous', value: 'Tous' }, ...statuses.value.map(s => ({ label: s.status, value: s.status }))]);
+
+// Liste filtrée
+const filteredTodos = computed(() => {
+  return tasks.value.filter(todo => {
+    const matchesTitle = !formData.value.title || todo.title.toLowerCase().includes(formData.value.title.toLowerCase());
+    const matchesStatus = selectedStatus.value === 'Tous' || todo.status === selectedStatus.value;
+    return matchesTitle && matchesStatus;
+  });
 });
-
 </script>
 
 <template>
   <div class="container mt-10">
+    <div class="flex items-center gap-4 mb-10">
+      <InputSearch name="search" placeholder="Recherche par titre" v-model="formData.title" />
+      <Dropdown v-model="selectedStatus" :options="statusOptions" />
+    </div>
     <table class="table table-bordered table-striped min-w-full text-xs">
       <thead>
         <tr class="text-center dark:border-gray-300 dark:bg-gray-50">
@@ -30,17 +117,20 @@ const props = defineProps({
         </tr>
       </thead>
       <tbody id="taskList">
-        <tr v-for="todo in todos" :key="todo?.id" class="text-lg border text-center border-opacity-20">
-          <td class="p-3">{{ todo?.title }}</td>
-          <td class="p-3">{{ todo?.description }}</td>
-          <td class="p-3">{{ todo?.status }}</td>
-          <td class="flex justify-center p-3">
-            <button @click="emit('editTodo', todo)" class="me-3 w-8 h-8 cursor-pointer">
-              <img src="../../../public/images/edit.png" alt="">
+        <tr v-for="todo in filteredTodos" :key="todo.id" class="text-lg border text-center border-opacity-20">
+          <td class="p-3">{{ todo.title }}</td>
+          <td class="p-3">{{ todo.description }}</td>
+          <td class="p-3">
+            <button @click="handleStatusClick(todo)" class="w-full h-full cursor-pointer">
+              {{ todo.status }}
             </button>
-            <button   @click="handleDeleteClick(todo.id)"
-            class="w-8 h-8 cursor-pointer">
-              <img src="../../../public/images/delete.png" alt="">
+          </td>
+          <td class="flex justify-center p-3">
+            <router-link :to="`/task-form/${todo.id}`" class="me-3 w-8 h-8 cursor-pointer">
+              <img src="../../../public/images/edit.png" alt="Modifier">
+            </router-link>
+            <button @click="handleDeleteClick(todo.id)" class="w-8 h-8 cursor-pointer">
+              <img src="../../../public/images/delete.png" alt="Supprimer">
             </button>
           </td>
         </tr>

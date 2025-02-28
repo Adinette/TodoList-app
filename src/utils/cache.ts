@@ -1,5 +1,5 @@
 import { QueryClient, QueryFilters } from '@tanstack/vue-query';
-import { AppResponseType } from "@/types";
+import { AppResponseType } from "../types/index";
 
 /**
  * Mise à jour du cache d'une collection

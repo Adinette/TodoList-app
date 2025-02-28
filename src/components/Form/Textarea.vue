@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { computed } from "vue";
 
 interface Props {
   name?: string;
@@ -15,38 +15,16 @@ interface Props {
 
 const props = defineProps<Props>();
 const emit = defineEmits(["update:modelValue"]);
-
-const textValue = ref(props.modelValue ?? "");
-
-const onInput = (event: Event) => {
-  const target = event.target as HTMLTextAreaElement;
-  emit("update:modelValue", target.value);
-};
-
 const hasError = computed(() => props.errors && props.errors.length > 0);
-const firstError = computed(() => (Array.isArray(props.errors) ? props.errors[0] : props.errors));
 </script>
 
 <template>
   <div>
-    <label v-if="label" :for="name" class="mb-2 text-base text-gray-500">
-      {{ label }} <span v-if="required" class="text-danger">*</span>
-    </label>
-
-    <textarea
-      :id="name"
-      :name="name"
-      :placeholder="placeholder || label"
-      v-model="textValue"
-      @input="onInput"
-      :rows="rows || 3"
-      :class="[
+    <textarea :id="name" :name="name" :placeholder="placeholder || label" :value="modelValue"
+      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)" :rows="rows || 3" :class="[
         'p-3 border border-neutral-200 bg-gray-50 rounded-md w-full',
         hasError ? 'border-danger' : '',
         inputClass
-      ]"
-    ></textarea>
-
-    <p v-if="hasError" class="text-danger mt-1 text-sm">{{ firstError }}</p>
+      ]"></textarea>
   </div>
 </template>
