@@ -11,7 +11,7 @@ export const ROUTES = {
 export const MODEL_KEY = {
   USERS: "user",
   TASKS: "task",
-  STATUSTASKS: "taskStatus",
+  STATUSTASKS: "task-status",
 };
 
 export const COOKIE_ATTRIBUTES = {

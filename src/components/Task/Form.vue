@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, defineProps, defineEmits, toRaw } from "vue";
+import { ref, watch, toRaw } from "vue";
 import InputText from "../Form/InputText.vue";
 import Textarea from "../Form/Textarea.vue";
 import InputDate from "../Form/InputDate.vue";
@@ -25,7 +25,6 @@ interface Task {
 const route = useRoute();
 const router = useRouter();
 const emit = defineEmits(["addTodo", "updateTodo"]);
-const props = defineProps<{ selectedTodo: Task | null }>();
 const formData = ref<Task>({
   title: "",
   description: "",
