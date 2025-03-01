@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from "vue";
-import { useGetStatusTasksApi } from "../../api/taskStatus-api";
+import { useGetStatusTasksApi } from "../../api/task-status-api";
 import { useGetTasksApi } from "../../api/task-api";
 
 const tasks = ref<{ id: number; title: string; description: string; status: string }[]>([]);
@@ -42,16 +42,15 @@ const totalTasks = computed(() => tasks.value.length);
 </script>
 
 <template>
-  <div class="max-w-4xl mx-auto p-6">
-    <h2 class="text-2xl text-center mb-8 font-bold">Tableau de Bord</h2>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="p-4 bg-blue-500 text-white rounded-lg shadow">
-        <h2 class="text-xl font-bold">Total des Tâches</h2>
-        <p class="text-2xl">{{ totalTasks }}</p>
+        <h2 class="text-3xl font-bold">Total des Tâches</h2>
+        <span class="text-2xl font-semibold">{{ totalTasks }}</span>
       </div>
       <div v-for="status in statuses" :key="status.name" class="p-4 bg-green-500 text-white rounded-lg shadow">
-        <h2 class="text-xl font-bold">{{ status.name }}</h2>
-        <p class="text-2xl">{{ status.count }}</p>
+        <h2 class="text-3xl font-bold">Tâche {{ status.name }}</h2>
+        <span class="text-2xl font-semibold">{{ status.count }}</span>
       </div>
     </div>
   </div>

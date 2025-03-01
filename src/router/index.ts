@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
-import TaskList from "../views/task/TaskList.vue";
-import TaskDashboard from "../views/task/TaskDashboard.vue";
-import TaskForm from "../views/TaskForm.vue/";
+import TaskList from "../views/task/Task-list.vue";
+import TaskDashboard from "../views/task/Task-dashboard.vue";
+import TaskForm from "../views/task/Task-form.vue/";
 import Register from "../views/auth/Register.vue";
 import Login from "../views/auth/Login.vue";
-import { useUserStore } from "../stores/userStore";
+import { useUserStore } from "../stores/user-store";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -29,13 +29,13 @@ const router = createRouter({
     {
       path: "/forgot-password",
       name: "forgot-password",
-      component: () => import("../views/auth/ForgotPassword.vue"),
+      component: () => import("../views/auth/Forgot-password.vue"),
     },
 
     {
       path: "/reset-password/:token",
       name: "/reset-password",
-      component: () => import("../views/auth/ResetPassword.vue"),
+      component: () => import("../views/auth/Reset-password.vue"),
       props: true,
     },
     {

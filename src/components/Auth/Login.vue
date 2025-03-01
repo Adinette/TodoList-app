@@ -36,8 +36,8 @@ const submitForm = async () => {
       password: password.value,
     };
     const response = await userLogin(credentials);
-    if (response && response?.data?.token) {
-      localStorage.setItem('authToken', response.data.token);
+    if (response && response?.token) {
+      localStorage.setItem('authToken', response.token);
       router.push('/task-list');
     } else {
       errorMessage.value = "Email ou mot de passe incorrect.";

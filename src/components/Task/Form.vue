@@ -90,13 +90,13 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div class="max-w-4xl mx-auto p-6">
-    <h2 class="text-2xl text-center mb-8 font-bold">
+  <div>
+    <h2 class="text-2xl text-[#0060bf] text-center font-bold mb-4">
       {{ taskId ? "Modifier" : "Ajouter" }} une tâche
     </h2>
     <form @submit.prevent="handleSubmit" class="pb-4">
       <InputText name="taskId" v-model="formData.id" label="" hidden="true" />
-      <div class="grid grid-cols-2 gap-4 md:grid-cols-2">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
         <InputText name="title" placeholder="Titre de la tâche" v-model="formData.title" required />
         <select
           name="status"
@@ -111,7 +111,7 @@ const handleSubmit = async () => {
           </option>
         </select>
       </div>
-      <div class="grid grid-cols-2 gap-4 md:grid-cols-2 my-8">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 my-8">
         <InputDate label="Date de debut" v-model="formData.startDate" />
         <InputDate label="Date de fin" v-model="formData.endDate" />
       </div>

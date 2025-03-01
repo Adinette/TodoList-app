@@ -40,8 +40,8 @@ export const headerLinks = [
 export const eventDefaultValues = {
   title: "",
   description: "",
-  startDateTime: new Date(),
-  endDateTime: new Date(),
+  startDate: new Date(),
+  endDate: new Date(),
   status: "",
 };
 

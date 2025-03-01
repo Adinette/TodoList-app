@@ -17,6 +17,8 @@ interface ITask extends ITimeStamp {
   title: string;
   description: string;
   status: string;
+  startDate: string;
+  endDate: string;
 }
 
 interface IStatusTask extends ITimeStamp {

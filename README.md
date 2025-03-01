@@ -1,30 +1,42 @@
 # TodoList
 
-This template should help get you started developing with Vue 3 in Vite.
-
 ## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Ce projet est une application de gestion de tâches développée avec Vue 3 et Vite.
 
-## Type Support for `.vue` Imports in TS
+### Pré-requis
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+### Avant de commencer, assure-toi d’avoir les outils suivants installés sur ta machine :
 
-## Customize configuration
+### Node.js (Version 16 ou supérieure recommandée)
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+### npm
 
-## Project Setup
+### Un éditeur de code comme VSCode avec l’extension Volar (désactiver Vetur si installé).(https://marketplace.visualstudio.com/items?itemName=Vue.volar)
 
-```sh
+# Installation
+
+## Clone le projet et installe les dépendances :
+
+### Cloner le dépôt
+git clone https://github.com/Adinette/TodoList-app.git
+
+### Accéder au dossier du projet
+cd todolist
+
+### Installer les dépendances
 npm install
-```
 
-### Compile and Hot-Reload for Development
+# Lancer le projet en mode développement
 
-```sh
-npm run dev
-```
+ npm run dev
+
+## Démarre le serveur de développement avec :
+
+## Une fois lancé, ouvre ton navigateur à l’adresse :
+👉 http://localhost:5173/
+
+### Le projet se recharge automatiquement lors des modifications.
 
 ### Type-Check, Compile and Minify for Production
 

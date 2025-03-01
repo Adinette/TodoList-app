@@ -1,17 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import List from '../../components/Task/List.vue';
-
-const tasks = ref([]);
 
 </script>
 
 <template>
-  <div class="p-6">
-    <h1 class="text-2xl font-bold mb-4">Liste des Tâches</h1>
+  <div class="md:max-w-2xl lg:max-w-3xl w-96 md:w-full mx-auto pt-24 pb-20">
+    <h1 class="text-2xl text-[#0060bf] text-center font-bold mb-4">Liste des Tâches</h1>
     <List />
-    <div v-if="tasks.length === 0" class="text-center text-gray-500 mt-4">
-      Aucune tâche disponible.
-    </div>
   </div>
 </template>

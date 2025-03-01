@@ -4,17 +4,6 @@
 <template>
   <div class="mt-auto px-4 py-6 dark:bg-gray-100 dark:text-gray-600">
     <div class="container flex flex-wrap items-center justify-center mx-auto space-y-4 sm:space-y-0">
-      <div class="flex flex-row pr-8 space-x-4 sm:space-x-8">
-
-        <ul class="flex flex-wrap items-center space-x-4 sm:space-x-8">
-          <li>
-            <router-link to="/task-list">Mes tâches</router-link>
-          </li>
-          <li>
-            <router-link to="/task-dashboard">Mon tableau de bord</router-link>
-          </li>
-        </ul>
-      </div>
       <div class="flex items-center justify-center flex-shrink-0 w-12 h-12 rounded-full dark:bg-[#0060bf]">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor"
           class="w-5 h-5 rounded-full dark:text-gray-50">

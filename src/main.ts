@@ -3,14 +3,12 @@ import App from './App.vue';
 import router from './router';
 import { createPinia } from 'pinia';
 import { VueQueryPlugin, QueryClient } from '@tanstack/vue-query';
-// import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
-import { useUserStore } from './stores/userStore';
-
-
+import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
+import { useUserStore } from './stores/user-store';
 
 const app = createApp(App);
 const pinia = createPinia();
-// pinia.use(piniaPluginPersistedstate);
+pinia.use(piniaPluginPersistedstate);
 
 app.use(pinia);
 
@@ -21,8 +19,6 @@ app.use(VueQueryPlugin, { queryClient });
 const userStore = useUserStore();
 userStore.initializeAuth();
 console.log(userStore.isAuthenticated);
-
-
 
 app.use(router);
 

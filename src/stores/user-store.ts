@@ -52,9 +52,14 @@ export const useUserStore = defineStore("user", {
       const storedToken = localStorage.getItem("authToken");
       if (storedToken) {
         try {
+          // Vérifiez que le token est bien formé avant de le décoder
+          const parts = storedToken.split('.');
+          if (parts.length !== 3) {
+            throw new Error('Invalid token format');
+          }
+
           const decodedToken = jwtDecode<{ exp: number; user: IUser }>(storedToken);
           const currentTime = Date.now() / 1000;
-
           if (decodedToken.exp > currentTime) {
             this.token = storedToken;
             this.user = decodedToken.user;

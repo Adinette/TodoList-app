@@ -43,8 +43,9 @@ const submitForm = async () => {
         placeholder="Nouveau mot de passe" v-model="newPassword"></InputPassword>
       <InputPassword :id="confirmPassword" :name="confirmPassword" :type="confirmPassword"
         placeholder="Confirmer le mot de passe" v-model="confirmPassword"></InputPassword>
-      <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-md">
-        Modifier mon mot de passe
+      <button type="submit"
+      class="px-3 py-2 font-semibold text-xl rounded-xl dark:bg-white dark:text-[#0060bf] w-full">
+      Modifier mon mot de passe
       </button>
     </Form>
   </div>

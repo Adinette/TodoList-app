@@ -9,8 +9,8 @@ watch(tasksData, (newTasks) => { if (newTasks) tasks.value = newTasks; });
 </script>
 
 <template>
-  <div class="p-6">
-    <h1 class="text-2xl font-bold mb-4">Tableau de Bord</h1>
+  <div class="md:max-w-2xl lg:max-w-3xl w-96 md:w-full mx-auto pt-24 pb-20 md:pb-60">
+    <h2 class="text-2xl text-[#0060bf] text-center font-bold mb-6">Mon tableau de Bord</h2>
     <Dashboard :tasks="tasks" />
   </div>
 </template>

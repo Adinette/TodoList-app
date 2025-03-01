@@ -1,4 +1,4 @@
-import { AppResponseType, type PromisedAppResponseType } from "../types";
+import {  type PromisedAppResponseType } from "../types";
 import requestService from "./request.service";
 import { type ITask } from "../models";
 import { MODEL_KEY } from "../constants";
@@ -38,7 +38,7 @@ function editStatusTaskService({
   id: string;
   data: Partial<ITask>;
 }): PromisedAppResponseType<ITask> {
-  return request.put(id, data);
+  return request.put(`statusTask/${id}`, data);
 }
 
 function deleteTaskService(id: string): PromisedAppResponseType<ITask> {

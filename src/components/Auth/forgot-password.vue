@@ -37,8 +37,9 @@ const submitForm = async () => {
       </div>
       <div class="text-center">
         <div class="mb-4">
-          <button type="submit" class="text-lg font-medium text-white underline">
-            Recuperer mon mot de passe
+          <button type="submit"
+          class="px-3 py-2 font-semibold text-xl rounded-xl dark:bg-white dark:text-[#0060bf] w-full">
+          Recuperer mon mot de passe
           </button>
         </div>
       </div>
