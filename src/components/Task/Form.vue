@@ -8,11 +8,6 @@ import { useCreateTaskApi, useEditTaskApi, useGetTaskApi } from "../../api/task-
 import { useRoute, useRouter } from "vue-router";
 import dayjs from "dayjs";
 
-interface Status {
-  id: string;
-  status: string;
-}
-
 interface Task {
   title: string;
   description: string;
@@ -50,6 +45,7 @@ watch(
         status: taskData.value.status,
         startDate: taskData.value.startDate,
         endDate: taskData.value.endDate,
+        id:taskId,
       };
     }
   }
@@ -72,7 +68,6 @@ const handleSubmit = async () => {
 
     if (taskId) {
       const dataToUpdate = toRaw(formattedData);
-      console.log("Mise à jour de la tâche :", dataToUpdate);
       await editTask({ id: taskId, data: dataToUpdate });
       emit("updateTodo", dataToUpdate);
       router.push("/task-list");
@@ -82,7 +77,7 @@ const handleSubmit = async () => {
       emit("addTodo", response);
     }
   } catch (error) {
-    console.error("Erreur lors de la création ou de la modification de la tâche :", error);
+    throw error
   }
   formData.value = { title: "", description: "", status: "", id: "", startDate: "", endDate: "" };
 };

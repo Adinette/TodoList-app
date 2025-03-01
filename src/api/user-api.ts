@@ -32,8 +32,8 @@ function useGenericQuery<T>(
   });
 }
 
-function handleMutationSuccess<T extends Record<string, any>>(qryClient: QueryClient, data: T) {
-  updateCollectionCache<T>([MODEL_KEY.USERS], qryClient, { data });
+function handleMutationSuccess(qryClient: QueryClient, data: IUser) {
+  updateCollectionCache([MODEL_KEY.USERS], qryClient, { data });
 }
 
 function useGetUsersApi(

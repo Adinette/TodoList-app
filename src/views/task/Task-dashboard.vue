@@ -1,11 +1,22 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import { useGetTasksApi } from '../../api/task-api';
-import Dashboard from '../../components/Task/Dashboard.vue';
+import { ref, watch } from "vue";
+import { useGetTasksApi } from "../../api/task-api";
+import Dashboard from "../../components/Task/dashboard.vue";
 
-const tasks = ref([]);
+interface Task {
+  id: string;
+  title: string;
+  description: string;
+  status: string;
+  startDate: string;
+  endDate: string;
+}
+
+const tasks = ref<Task[]>([]);
 const { data: tasksData } = useGetTasksApi();
-watch(tasksData, (newTasks) => { if (newTasks) tasks.value = newTasks; });
+watch(tasksData, (newTasks) => {
+  if (newTasks) tasks.value = newTasks as Task[];
+});
 </script>
 
 <template>

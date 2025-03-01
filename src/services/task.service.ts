@@ -24,7 +24,6 @@ function editTaskService({
   id: string;
   data: Partial<ITask>;
 }): PromisedAppResponseType<ITask> {
-  console.log("Data received in editTaskService:", data);
   if (!data || Object.keys(data).length === 0) {
     throw new Error("Data must be provided.");
   }

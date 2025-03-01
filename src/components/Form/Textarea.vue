@@ -14,7 +14,6 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits(["update:modelValue"]);
 const hasError = computed(() => props.errors && props.errors.length > 0);
 </script>
 

@@ -47,8 +47,6 @@ export default function requestService({
   }
 
   function put(crud = "", body = {}) {
-    console.log("Request PUT data:", body);
-
     return axiosInstance.put(formatUrl(crud), body);
   }
 

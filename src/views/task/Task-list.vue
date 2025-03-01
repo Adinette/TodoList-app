@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import List from '../../components/Task/List.vue';
+import List from '../../components/Task/list.vue';
 
 </script>
 

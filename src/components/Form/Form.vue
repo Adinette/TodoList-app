@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, defineProps, defineExpose } from "vue";
 
 const formRef = ref(null);

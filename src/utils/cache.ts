@@ -27,7 +27,7 @@ export function updateCollectionCache<T extends Record<string, any>>(
   } = options;
 
   if (!deleteItem && !data) {
-    throw new Error("Data must be provided.");
+    throw new Error;
   }
 
   const collection = queryClient.getQueryData<AppResponseType<T[]>>(collectionCacheKey);

@@ -50,7 +50,7 @@ watch(tasksData, (newTasks) => {
 
 // Fonction pour supprimer une tâche
 const deleteMutation = useDeleteTaskApi();
-const deleteTodo = async (id: any) => {
+const deleteTodo = async (id: string) => {
   try {
     console.log("Tentative de suppression de la tâche avec ID:", id);
     await deleteMutation.mutateAsync(id);
@@ -91,8 +91,8 @@ const handleStatusClick = async (task: Task) => {
     }
     fetchTasks();
   } catch (err) {
-    console.error("Erreur lors de la mise à jour du statut de la tâche:", err);
-  }
+    throw err;
+    }
 };
 
 // Liste des options pour le filtre de statut

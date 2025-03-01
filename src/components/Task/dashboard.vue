@@ -3,7 +3,7 @@ import { ref, computed, onMounted, watch } from "vue";
 import { useGetStatusTasksApi } from "../../api/task-status-api";
 import { useGetTasksApi } from "../../api/task-api";
 
-const tasks = ref<{ id: number; title: string; description: string; status: string }[]>([]);
+const tasks = ref<{ id: number; title: string; description: string; status: string;}[]>([]);
 const statuses = ref<{ name: string; count: number }[]>([]);
 
 // Calcul du nombre total de tâches

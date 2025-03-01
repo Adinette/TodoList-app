@@ -7,7 +7,7 @@ import Form from "../Form/Form.vue";
 
 const route = useRoute();
 const router = useRouter();
-const token = route.params.token;
+const token = route.params.token || "";
 const newPassword = ref("");
 const confirmPassword = ref("");
 const errorMessage = ref("");

@@ -1,5 +1,5 @@
-<script setup>
-import ResetPassword from "../../components/Auth/ResetPassword.vue";
+<script setup lang="ts">
+import ResetPassword from "../../components/Auth/reset-password.vue";
 </script>
 
 <template>

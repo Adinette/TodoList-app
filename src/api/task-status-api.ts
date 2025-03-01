@@ -28,8 +28,8 @@ function useGenericQuery<T>(
 }
 
 // Common function for mutation success handling
-function handleMutationSuccess<T extends Record<string, any>>(qryClient: QueryClient, data: T) {
-  updateCollectionCache<T>([MODEL_KEY.STATUSTASKS], qryClient, { data });
+function handleMutationSuccess(qryClient: QueryClient, data: IStatusTask) {
+  updateCollectionCache([MODEL_KEY.STATUSTASKS], qryClient, { data });
 }
 
 // Fetch all tasks status

@@ -1,5 +1,5 @@
-<script setup>
-import ForgotPassword from "../../components/Auth/ForgotPassword.vue";
+<script setup lang="ts">
+import ForgotPassword from "../../components/Auth/forgot-password.vue";
 </script>
 
 <template>
